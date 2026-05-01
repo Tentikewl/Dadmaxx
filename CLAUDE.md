@@ -9,24 +9,21 @@ Ryan talks conversationally. Claude handles all documentation, calendar, and tra
 
 ## Session startup (run every time)
 
-At the start of every session, read these files in order:
-1. `harrison-state.md` — current snapshot of Harrison's state, routine, and goals
-2. `harrison-log.md` — last 2–3 entries for recent context
-3. `food-tracker.md` — what's been tried, what's next
-4. `activity-tracker.md` — activities log
+At the start of every session, read `state-index.md` only. Load other files lazily when relevant:
+- `harrison-state.md` — when routine, rules, or goals come up
+- `food-tracker.md` — when food or feeding is discussed
+- `activity-tracker.md` — when activities or planning are discussed
+- `harrison-log.md` — when recent history is needed
 
-Greet Ryan with a one-line summary: current date, what activities are on today, and anything flagged from last session.
+Do not narrate which files you are loading.
 
-## Session end (NON-NEGOTIABLE)
+Greet Ryan with one line: current date, today's activity (from state-index), and any flag from the last session.
 
-**At the end of every session, without being asked:**
-1. Update `harrison-state.md` if anything has changed (routine, weight, goals, rules)
-2. Append a dated entry to `harrison-log.md` summarising what happened
-3. Update `food-tracker.md` if any foods were tried or reactions noted
-4. Update `activity-tracker.md` if any activities happened
+## Session end
 
-If Ryan ends a session without triggering a log update, do it anyway before closing.
-This is not optional. If Ryan has to ask for an update, the system has failed.
+Write to files whenever alignment is reached mid-session — don't batch to the end. If Ryan describes a new pattern, update `harrison-state.md` immediately. If a food is tried, update `food-tracker.md` immediately. Session may close without warning, so write as you go.
+
+At session end, as a safety net: if anything changed that wasn't already written, write it now. Logging (`harrison-log.md`) is optional — the system functions without it.
 
 ## Slash commands
 
