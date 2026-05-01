@@ -1,41 +1,57 @@
 # /log — Daily Log Entry
 
-Ryan will describe his day conversationally. Extract and record everything automatically.
+Completely optional. The system functions without it. If Ryan uses it, great — extract what you can.
 
-## What to extract
+Ryan describes his day conversationally. As much or as little as he wants. Do not prompt him for more detail — work with what you get.
 
-From Ryan's description, identify:
+## What to extract (from whatever Ryan says)
 
-1. **Foods** — what was offered, what was eaten, how much, any reactions or faces made
-2. **Formula** — total ml across the day if mentioned
-3. **Naps** — actual times vs planned, how long, how easy to settle
-4. **Activities** — what was done, how Harrison responded, energy level
-5. **Mood / development** — anything notable (new skill, fussy period, teething signs, etc.)
-6. **Deviations from routine** — anything that shifted the usual schedule
-7. **What worked / what didn't** — Ryan's own read on the day
+- **Food / formula** → `logs/feeds.md`
+- **Naps / sleep** → `logs/sleep.md`
+- **Activities** → `logs/activities.md`
+- **Development observations** → `logs/milestones.md`
 
-## What to do with it
+Also:
+- `food-tracker.md` — if a new food was tried or a reaction noted
+- `activity-tracker.md` — if an activity was attended (increment attendance count, add brief note)
 
-1. Append a dated entry to `harrison-log.md` with a clean summary of the above
-2. Update `food-tracker.md` if any new foods were tried or reactions noted
-3. Update `activity-tracker.md` if activities happened (mark attended weeks, add notes)
-4. Update `harrison-state.md` if anything has structurally changed (new routine, weight, goals)
+Write to each relevant file immediately. Do not wait. Do not batch.
+
+## Entry format (per log file)
+
+Each entry is a single dated line, or a short list under a date heading if there's more to record. Keep it tight.
+
+Example for `logs/feeds.md`:
+```
+2026-05-03: Avocado fingers — ate most of it, big fan. Formula ~650ml.
+```
+
+Example for `logs/sleep.md`:
+```
+2026-05-03: Nap 1 45min (short), Nap 2 1hr 20min. Settled well both times.
+```
+
+Example for `logs/activities.md`:
+```
+2026-05-03: Baby Time (Chatswood Library) — loved the singing, very engaged.
+```
+
+## Session line
+
+Always write one line to `logs/sessions.md` (newest first):
+```
+2026-05-03: /log — solids, naps, Baby Time.
+```
 
 ## Response format
 
-After logging, reply with:
-- One sentence confirming what was logged
-- One observation or encouragement (keep it brief)
-- Any flag worth noting for tomorrow (e.g. "Harry seemed off solids — worth watching tomorrow")
+After writing:
+- One sentence confirming what was logged (skip if nothing to log)
+- One optional flag for tomorrow if something stood out
+- That's it — no summaries, no lists, no paragraphs
 
-Do not ask Ryan to confirm the log. Just do it.
+## Handling minimal input
 
-## Example
+If Ryan says "good" or "fine" — log what you can (date, "uneventful day") and move on. Do not interrogate.
 
-Ryan: "Pretty good day. He smashed the avocado fingers — ate basically all of it. Nap 1 was only 45 min, bit of a disaster. Went to the library Baby Time, he loved the singing."
-
-Claude extracts:
-- Food: avocado fingers, eaten enthusiastically (first time)
-- Nap 1: 45 min (short), settled okay
-- Activity: Baby Time at Chatswood Library, positive response to singing
-Then logs, updates food-tracker (avocado: positive), updates activity-tracker (Wednesday library: attended).
+If Ryan says nothing useful — write nothing to the topic files. Just write the session line.

@@ -23,7 +23,18 @@ Greet Ryan with one line: current date, today's activity (from state-index), and
 
 Write to files whenever alignment is reached mid-session — don't batch to the end. If Ryan describes a new pattern, update `harrison-state.md` immediately. If a food is tried, update `food-tracker.md` immediately. Session may close without warning, so write as you go.
 
-At session end, as a safety net: if anything changed that wasn't already written, write it now. Logging (`harrison-log.md`) is optional — the system functions without it.
+Mid-session writes go to the relevant `logs/` topic file:
+- Food / formula → `logs/feeds.md`
+- Sleep / naps → `logs/sleep.md`
+- Activities → `logs/activities.md`
+- Development observations → `logs/milestones.md`
+- One session line → `logs/sessions.md` (newest first)
+
+At session end, as a safety net: if anything happened this session that wasn't already captured mid-session, write it now to the relevant `logs/` topic file.
+
+Logging is optional — the system functions without it. If Ryan never uses `/log` or `/debrief`, that is fine.
+
+Note: `harrison-log.md` is a historical archive (entries up to Slice 4 setup). All new entries go to `logs/` going forward. Do not write new entries to `harrison-log.md`.
 
 ## Slash commands
 
