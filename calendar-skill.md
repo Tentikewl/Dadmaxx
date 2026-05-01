@@ -6,7 +6,7 @@ This skill governs how Claude reads and updates Google Calendar for Dad Max sess
 
 Use the `mcp__c683d015-7a1f-4837-a1ab-b4e4ee21fe80__*` tools for all calendar operations:
 
-- `list_calendars` — list available calendars, identify the right one (likely "Dad Max" or Ryan's primary)
+- `list_calendars` — list available calendars. **Use `18rgavo@gmail.com` for all Dad Max events** (confirmed primary personal calendar)
 - `list_events` — read events for a date range
 - `get_event` — fetch a specific event's details
 - `create_event` — add a new event
