@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__c683d015-7a1f-4837-a1ab-b4e4ee21fe80__list_calendars",
+      "mcp__c683d015-7a1f-4837-a1ab-b4e4ee21fe80__list_events",
+      "mcp__c683d015-7a1f-4837-a1ab-b4e4ee21fe80__get_event",
+      "mcp__c683d015-7a1f-4837-a1ab-b4e4ee21fe80__create_event",
+      "mcp__c683d015-7a1f-4837-a1ab-b4e4ee21fe80__update_event",
+      "mcp__c683d015-7a1f-4837-a1ab-b4e4ee21fe80__delete_event",
+      "mcp__c683d015-7a1f-4837-a1ab-b4e4ee21fe80__respond_to_event",
+      "mcp__c683d015-7a1f-4837-a1ab-b4e4ee21fe80__suggest_time"
+    ]
+  }
+}
