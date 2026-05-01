@@ -16,6 +16,7 @@ For each day Mon–Fri:
 - If a day has an `active` activity, slot it in at the listed time
 - If a day is open (Monday / Friday), check the to-try list and suggest one candidate
 - If the to-try list is empty, leave the day as "Open — no activity" (do not invent activities)
+- Check for any activities marked `on-hold` — if a slot is open and Ryan hasn't mentioned returning to it, leave the slot open rather than auto-restoring it.
 
 Before placing any activity, verify it clears nap windows:
 - Nap 1: ~11:00am → activity must start by 9:30am OR start at 12pm or later

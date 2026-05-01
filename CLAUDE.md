@@ -47,6 +47,27 @@ At session end, as a safety net: if anything changed that wasn't already written
 - Solids before formula so Harrison is hungry
 - Max wake window before sleep: 2.5 hours
 
+## Activity drop/replace workflow
+
+No special command needed — Ryan just mentions it conversationally ("that playgroup was terrible", "Harry hated it", "not going back to that one").
+
+When Ryan signals an activity isn't working:
+
+1. **Recognise the signal** — any negative mention of an activity (bad, disappointing, not working, hated it, too much, not going back) triggers this flow.
+2. **Mark it dropped immediately** — update `activity-tracker.md`: move the activity to the Dropped section with `dropped` status, a short note in Ryan's words, and the date. Do not wait for confirmation.
+3. **Open a brainstorm** — check the to-try list in `activity-tracker.md` first. If there are candidates, offer them. If the list is empty, suggest 2–3 alternatives based on Harrison's age and what's worked before.
+4. **Work it out conversationally** — no forms, no structured input. Just talk it through. Ryan might say "yeah the park swing one" or "not sure, what else is there?"
+5. **Once Ryan picks something:**
+   - If it's a future option (Ryan isn't ready to schedule it): add it to the to-try list in `activity-tracker.md`.
+   - If Ryan wants it on the schedule now: mark it `active`, add it to the recurring table, and update the calendar slot using the same MCP tools as `/plan-week`. If MCP is unavailable, output plain text fallback.
+6. **Write changes immediately** — do not wait until end of session.
+7. **Calendar update** — if a recurring slot is now empty (e.g. Tuesday), use `list_calendars` → `list_events` → `delete_event` (for the dropped activity) and `create_event` (for the replacement, if one is scheduled). If MCP tools are unavailable, output the plain text fallback from `/plan-week` Step 5.
+
+**Status transitions:**
+- `active` → `dropped`: Ryan says it was bad. Claude marks it, brainstorms replacement.
+- `to-try` → `active`: Ryan confirms something. Claude schedules it and updates the calendar.
+- `active` → `on-hold`: Ryan wants a break but might return. Claude marks it `on-hold`, leaves the slot open, does not auto-fill.
+
 ## File ownership
 
 Claude owns and maintains all files in this project. Ryan reads them; Claude writes them.

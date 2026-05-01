@@ -2,6 +2,16 @@
 
 Updated automatically by Claude. Ryan does not edit this file.
 
+## How drops work
+
+Activities move through statuses conversationally — Ryan never needs a command.
+
+- **`active` → `dropped`**: Ryan says the activity was bad or isn't working. Claude marks it dropped with a short note and date, then opens a brainstorm for a replacement.
+- **`to-try` → `active`**: Ryan confirms something from the to-try list. Claude marks it active, adds it to the schedule, and updates the calendar.
+- **`active` → `on-hold`**: Ryan wants a break from an activity but might return. Claude marks it on-hold and leaves the slot open rather than auto-filling.
+
+No special commands needed for any of these transitions.
+
 ## Recurring weekly activities (Term 2, ends July 1)
 
 | Day       | Activity                            | Time         | Location                                      | Cost | Status  | Notes                                                                                  |
