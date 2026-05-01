@@ -4,13 +4,32 @@ Updated automatically by Claude. Ryan does not edit this file.
 
 ## Recurring weekly activities (Term 2, ends July 1)
 
-| Day       | Activity                     | Attended weeks | Notes                              |
-|-----------|------------------------------|----------------|------------------------------------|
-| Monday    | Glenaeon Steiner Playgroup   | 0              | Needs booking, $35                 |
-| Tuesday   | Willoughby Playgroup         | 0              | Free, noon start fits post-nap 1   |
-| Wednesday | Baby Time Chatswood Library  | 0              | Free, 11am — tight on nap 1 window |
-| Thursday  | Artarmon Supported Playgroup | 0              | Free, good structured session      |
-| Friday    | Flex / outdoor               | 0              | Plan around weather and energy     |
+| Day       | Activity                            | Time         | Location                                      | Cost | Status  | Notes                                                                                  |
+|-----------|-------------------------------------|--------------|-----------------------------------------------|------|---------|----------------------------------------------------------------------------------------|
+| Monday    | —                                   | —            | —                                             | —    | —       | Open slot                                                                              |
+| Tuesday   | Willoughby Playgroup (Gymboree)     | 12pm         | 56–58 Laurel St, Willoughby (Scouts Hall)     | Free | active  | Park on Hollywood Cres or Laurel St. Arrive 5 min early.                               |
+| Wednesday | Baby Time                           | 11am         | Chatswood Library                             | Free | active  | Booking: libraries.willoughby.nsw.gov.au/Eventbrite/Baby-Time-292937432747             |
+| Thursday  | Supported Playgroup Artarmon        | 10–11:30am   | 18 Broughton Rd, Artarmon (Kids Cottage)      | Free | active  | Contact: 9410 0174 / spns@integricare.org.au                                           |
+| Friday    | —                                   | —            | —                                             | —    | —       | Open slot                                                                              |
+
+### Dropped activities
+
+| Activity                  | Status  | Note                          |
+|---------------------------|---------|-------------------------------|
+| Glenaeon Steiner Playgroup | dropped | Too expensive ($35/session)  |
+
+## To Try
+
+Candidates for open slots (Monday / Friday) or to replace a dropped activity. Claude populates this list from `/suggest` outputs and anything Ryan mentions.
+
+| Activity | Day preference | Notes |
+|----------|---------------|-------|
+
+## Term 2 calendar flags
+
+- **June 8**: Public holiday — no Monday session (Mondays have 9 sessions total vs 10 for Tue/Wed/Thu)
+- **June 22**: Proactive flag — "Term 2 ends in 9 days — time to research Term 3 options"
+- **July 1**: Term 2 ends — all recurring activities stop
 
 ## One-off and ad hoc activities
 

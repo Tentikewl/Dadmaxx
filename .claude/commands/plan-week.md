@@ -1,59 +1,88 @@
 # /plan-week — Weekly Planning and Calendar Update
 
-Read the current calendar, state files, and log. Propose the week. Execute calendar updates on confirmation.
+Read state files and activity tracker. Propose the week as one line per day. Execute calendar updates on confirmation.
 
 ## Step 1 — Gather context
 
-1. Call `list_calendars` to identify the right calendar
-2. Call `list_events` for the next 7 days
-3. Read `harrison-state.md`
-4. Read last 3 entries of `harrison-log.md`
-5. Read `food-tracker.md` for what to introduce this week
-6. Read `activity-tracker.md` for attendance gaps and patterns
+1. Read `state-index.md` — routine snapshot, current flags
+2. Read `activity-tracker.md` — active schedule, dropped activities, to-try list
+3. Read last 3 entries from `logs/sessions.md` if the file exists — skip gracefully if it doesn't
+
+Do not narrate the file loading to Ryan.
 
 ## Step 2 — Build the week plan
 
-Propose:
+For each day Mon–Fri:
+- If a day has an `active` activity, slot it in at the listed time
+- If a day is open (Monday / Friday), check the to-try list and suggest one candidate
+- If the to-try list is empty, leave the day as "Open — no activity" (do not invent activities)
 
-1. **Activities** — which Term 2 sessions to attend each day, whether to book (Monday needs booking)
-2. **Food** — one new food to introduce this week and which day
-3. **Flex day (Friday)** — specific outdoor or ad hoc activity suggestion
-4. **Routine note** — anything to adjust based on recent log patterns
+Before placing any activity, verify it clears nap windows:
+- Nap 1: ~11:00am → activity must start by 9:30am OR start at 12pm or later
+- Nap 2: ~3:00pm → activity must end by 2:30pm OR start after 4:30pm
 
-Check nap window rules before placing any outing:
-- Nap 1: ~11:00am → outings should start by 9:30am or after 12:15pm
-- Nap 2: ~3:00pm → outings should end by 2:30pm or start after 5:15pm
+Wednesday Baby Time (11am) starts exactly at Nap 1 — flag if this is a concern, but keep it in the plan (it is the established time).
 
-## Step 3 — Present the plan
+## Step 3 — Show plan and ask once
 
-Show Ryan a concise summary:
+Present the plan as one line per day, then ask exactly once:
 
 ```
-Week of [date]
+Week of [Mon date] – [Fri date]
 
-Mon: Glenaeon Playgroup 9:30am (booking needed — confirm?)
-Tue: Willoughby Playgroup 12pm
-Wed: Baby Time Library 11am
-Thu: Artarmon Supported Playgroup 10am
-Fri: [specific suggestion]
+Mon: Open — no activity
+Tue: Willoughby Playgroup (Gymboree), 12pm — 56–58 Laurel St
+Wed: Baby Time, 11am — Chatswood Library
+Thu: Supported Playgroup Artarmon, 10am — 18 Broughton Rd
+Fri: Open — no activity
 
-New food: [food] on [day]
-Focus: [one developmental note]
+Update calendar?
 ```
 
-Ask: "Want me to update the calendar with this?"
+Do not ask for further confirmation or elaboration. One question only.
 
 ## Step 4 — Execute on confirmation
 
-On Ryan's go-ahead:
-- `create_event` or `update_event` for each session not already in calendar
+If Ryan says yes (any affirmative):
+- Call `list_calendars` to identify the right calendar
+- Call `list_events` for the week to check what's already there
+- For each activity not already in calendar: call `create_event`
+- For any conflicting or outdated event: call `update_event` or `delete_event`
 - Add 30-minute reminders to all activity events
-- Delete any conflicting placeholders
+- Standard event format:
+  - title: `[Activity name] — Harry`
+  - location: full address
+  - description: cost, contact, booking notes if any
 
-## Step 5 — Log the plan
+Execute all changes in one shot — do not ask again before each event.
 
-Append a brief "Week plan" entry to `harrison-log.md`.
+## Step 5 — Graceful degradation
 
-## Term end flag
+If any MCP calendar tool returns an error or is unavailable:
+- Do not fail or apologise repeatedly
+- Output a plain text copyable schedule instead:
 
-If current date is within 7 days of July 1: include a reminder — "Term 2 ends this week. These recurring activities won't continue. Run /plan-week after July 1 to set up Term 3."
+```
+--- COPY TO CALENDAR ---
+[Day, Date]: [Activity], [Time], [Location]
+...
+--- END ---
+```
+
+Then say: "Calendar tools aren't connected right now — here's the schedule to copy in manually."
+
+## Step 6 — Write session log
+
+After completing (whether calendar was updated or not), write one line to `logs/sessions.md`:
+
+```
+[YYYY-MM-DD]: /plan-week — week of [Mon date], [N] activities scheduled
+```
+
+If `logs/sessions.md` doesn't exist yet, create it with that line as the first entry.
+
+## Term 2 flags
+
+- **June 8**: No Monday session (public holiday) — note in the plan
+- **June 22**: Add flag — "Term 2 ends in 9 days — time to research Term 3 options"
+- **July 1**: Term 2 ends — remind Ryan that recurring activities stop and /plan-week will need fresh input for Term 3
