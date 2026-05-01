@@ -45,15 +45,16 @@ Do not ask for further confirmation or elaboration. One question only.
 ## Step 4 — Execute on confirmation
 
 If Ryan says yes (any affirmative):
-- Call `list_calendars` to identify the right calendar
+- Calendar ID is always `18rgavo@gmail.com` — do NOT call `list_calendars`
 - Call `list_events` for the week to check what's already there
+- Daily routine events (Wake, Breakfast, Brush teeth, Nap 1, Milk, Nap 2, Dinner solids, Bath, Brush teeth evening, Bedtime milk) are already recurring — do NOT recreate them
 - For each activity not already in calendar: call `create_event`
 - For any conflicting or outdated event: call `update_event` or `delete_event`
-- Add 30-minute reminders to all activity events
+- Add 30-minute reminders to all activity events (30 min = departure time from Artarmon, intentional)
 - Standard event format:
   - title: `[Activity name] — Harry`
   - location: full address
-  - description: cost, contact, booking notes if any
+  - description: cost, contact, booking notes + drive time + "Leave by [time]" (see drive times in `calendar-skill.md`)
 
 Execute all changes in one shot — do not ask again before each event.
 

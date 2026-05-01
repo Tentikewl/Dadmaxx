@@ -5,6 +5,7 @@ Last updated: May 2026
 - Age: 8 months
 - Weight: 9kg
 - Name used: Harry / Harrison
+- Home address: 9/14-20 Eric Rd, Artarmon NSW 2064
 
 ## Daily routine (Jessie's baseline)
 - Wake: 8:00am
@@ -34,11 +35,11 @@ Last updated: May 2026
 - Current focus: finger foods, holdable solids
 
 ## Weekly activities (Term 2, ends July 1)
-- Monday: Glenaeon Steiner Playgroup, 118 Sydney St Willoughby, 9:30–11:30am ($35, needs booking)
-- Tuesday: Playgroup, Willoughby 1st Scouts Hall, 56–58 Laurel St, 12pm
+- Monday: open
+- Tuesday: Willoughby Playgroup (Gymboree), 56–58 Laurel St, 12pm (free)
 - Wednesday: Baby Time, Chatswood Library, 11am (free)
 - Thursday: Supported Playgroup, Artarmon Kids Cottage, 18 Broughton Rd, 10–11:30am (free)
-- Friday: unscheduled — use for outdoor/flex activities
+- Friday: open
 
 ## Current goals
 - Maximise developmental activities

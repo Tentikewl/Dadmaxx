@@ -2,17 +2,32 @@
 
 This skill governs how Claude reads and updates Google Calendar for Dad Max sessions.
 
+## Key facts (do not re-derive these)
+
+- **Calendar ID**: `18rgavo@gmail.com` — always use this, never call `list_calendars`
+- **Ryan's home address**: 9/14-20 Eric Rd, Artarmon NSW 2064
+- **Daily routine events**: already created as recurring daily events (May 1–Aug 31). Do NOT recreate them.
+
+## Drive times from home (Artarmon)
+
+| Destination | Drive | Notes | Leave by |
+|-------------|-------|-------|----------|
+| Willoughby Scouts Hall (Tue 12pm) | ~10 min | Easy street parking | 11:30am |
+| Chatswood Library / The Concourse (Wed 11am) | ~15 min | Underground parking, allow extra | 10:30am |
+| Artarmon Kids Cottage (Thu 10am) | ~5 min | Around the corner | 9:40am |
+
+Always include drive time + departure note in new activity event descriptions.
+30-minute reminders on activity events are intentional — they fire at departure time.
+
 ## MCP tools available
 
 Use the `mcp__c683d015-7a1f-4837-a1ab-b4e4ee21fe80__*` tools for all calendar operations:
 
-- `list_calendars` — list available calendars. **Use `18rgavo@gmail.com` for all Dad Max events** (confirmed primary personal calendar)
 - `list_events` — read events for a date range
 - `get_event` — fetch a specific event's details
 - `create_event` — add a new event
-- `update_event` — modify an existing event (time, title, description, reminders)
+- `update_event` — modify an existing event (title, description, location, time only — does NOT support reminders)
 - `delete_event` — remove an event
-- `respond_to_event` — accept/decline invites
 - `suggest_time` — find free slots
 
 ## Graceful degradation
