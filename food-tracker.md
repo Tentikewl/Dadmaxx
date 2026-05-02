@@ -13,7 +13,7 @@ Updated automatically by Claude. Ryan does not edit this file.
 | Strawberry    | pre-May 2026    | —             | No reaction noted                       |
 | Banana        | pre-May 2026    | —             | Accepted well                           |
 | Porridge      | pre-May 2026    | with formula  | Accepted well                           |
-| Mandarin      | 2026-05-02      | finger food   | First try today                         |
+| Mandarin      | pre-May 2026    | finger food   | Had before, accepted well               |
 
 ## Foods to try next (prioritised)
 
