@@ -28,6 +28,11 @@ Last updated: May 2026
 - Solids before formula so he's hungry
 - Formula target: 600–800ml/day
 
+## Activity-day nap adjustments
+- **Tuesday** (Playgroup 12pm): Nap 1 at 10:45am (~45 min), up ~11:30am, leave for activity
+- **Wednesday** (Baby Time 11am): Go to activity, Nap 1 after — ~noon at home or in car on the way home
+- **Thursday** (Playgroup 10–11:30am): Go to activity, Nap 1 after — ~noon at home or in car on the way home
+
 ## Feeding
 - Transitioning off breastfeeding — Jessie available early morning/late night comfort only
 - Formula during day: ~600–800ml total target
