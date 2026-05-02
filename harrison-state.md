@@ -36,7 +36,7 @@ Last updated: May 2026
 ## Feeding
 - Transitioning off breastfeeding — Jessie available early morning/late night comfort only
 - Formula during day: ~600–800ml total target
-- Solids introduced: potato, carrot, egg, tomato, strawberry, banana, porridge with formula
+- Solids introduced: potato, carrot, egg, tomato, strawberry, banana, porridge with formula, mandarin
 - Current focus: finger foods, holdable solids
 
 ## Weekly activities (Term 2, ends July 1)
