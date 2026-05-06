@@ -14,6 +14,7 @@ Last updated: May 2026
 - Nap 1: 11:00am–12:00pm
 - Milk: 150ml
 - Play
+- Feed: 2:30pm (solids/milk — was going hungry through to 5pm wakeup)
 - Nap 2: 3:00pm–5:00pm
 - Solids: 120ml
 - Play
