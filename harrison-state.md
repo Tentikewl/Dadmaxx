@@ -14,6 +14,7 @@ Last updated: May 2026
 - Nap 1: 11:00am–12:00pm
 - Milk: 150ml
 - Play
+- Feed: 2:30pm (solids/milk — was going hungry through to 5pm wakeup)
 - Nap 2: 3:00pm–5:00pm
 - Solids: 120ml
 - Play
@@ -28,10 +29,15 @@ Last updated: May 2026
 - Solids before formula so he's hungry
 - Formula target: 600–800ml/day
 
+## Activity-day nap adjustments
+- **Tuesday** (Playgroup 12pm): Nap 1 at 10:45am (~45 min), up ~11:30am, leave for activity
+- **Wednesday** (Baby Time 11am): Go to activity, Nap 1 after — ~noon at home or in car on the way home
+- **Thursday** (Playgroup 10–11:30am): Go to activity, Nap 1 after — ~noon at home or in car on the way home
+
 ## Feeding
 - Transitioning off breastfeeding — Jessie available early morning/late night comfort only
 - Formula during day: ~600–800ml total target
-- Solids introduced: potato, carrot, egg, tomato, strawberry, banana, porridge with formula
+- Solids introduced: potato, carrot, egg, tomato, strawberry, banana, porridge with formula, mandarin
 - Current focus: finger foods, holdable solids
 
 ## Weekly activities (Term 2, ends July 1)

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grocery List</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #999;
+      margin: 24px 0 10px;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      color: #333;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    label.done {
+      opacity: 0.4;
+      text-decoration: line-through;
+    }
+    input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      accent-color: #4CAF50;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .note {
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-left: 4px;
+    }
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 14px;
+      background: #ff5555;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛒 Weekly Groceries</h1>
+
+  <h2>Meat & Fish</h2>
+  <label><input type="checkbox"> Chicken thighs</label>
+  <label><input type="checkbox"> Lamb shoulder <span class="note">bone-in</span></label>
+  <label><input type="checkbox"> Pork chops</label>
+  <label><input type="checkbox"> Bacon</label>
+  <label><input type="checkbox"> White fish fillets</label>
+  <label><input type="checkbox"> Eggs</label>
+
+  <h2>Produce</h2>
+  <label><input type="checkbox"> Potatoes <span class="note">mash + oven chips</span></label>
+  <label><input type="checkbox"> Carrots</label>
+  <label><input type="checkbox"> Sweet potato</label>
+  <label><input type="checkbox"> Green beans</label>
+  <label><input type="checkbox"> Mushrooms</label>
+  <label><input type="checkbox"> Capsicum or zucchini <span class="note">pizza topping</span></label>
+  <label><input type="checkbox"> Tinned tomatoes x2</label>
+  <label><input type="checkbox"> Fresh tomatoes <span class="note">shakshuka</span></label>
+  <label><input type="checkbox"> Onion</label>
+  <label><input type="checkbox"> Garlic</label>
+  <label><input type="checkbox"> Salad leaves</label>
+  <label><input type="checkbox"> Lemon</label>
+  <label><input type="checkbox"> Bananas</label>
+  <label><input type="checkbox"> Pear</label>
+  <label><input type="checkbox"> Avocado</label>
+
+  <h2>Pantry</h2>
+  <label><input type="checkbox"> Pasta</label>
+  <label><input type="checkbox"> Pizza dough or flour + yeast</label>
+  <label><input type="checkbox"> Olive oil</label>
+  <label><input type="checkbox"> Chicken stock</label>
+
+  <h2>Dairy</h2>
+  <label><input type="checkbox"> Mozzarella <span class="note">pizza</span></label>
+  <label><input type="checkbox"> Parmesan</label>
+  <label><input type="checkbox"> Thickened cream</label>
+  <label><input type="checkbox"> Butter</label>
+  <label><input type="checkbox"> Yoghurt <span class="note">Harry</span></label>
+
+  <h2>Don't Forget</h2>
+  <label><input type="checkbox"> Bread <span class="note">Harry</span></label>
+  <label><input type="checkbox"> Dishwasher tablets</label>
+
+  <button onclick="reset()">Reset List</button>
+
+  <script>
+    const boxes = document.querySelectorAll('input[type="checkbox"]');
+    boxes.forEach((box, i) => {
+      box.checked = localStorage.getItem('grocery_' + i) === 'true';
+      box.closest('label').classList.toggle('done', box.checked);
+      box.addEventListener('change', () => {
+        localStorage.setItem('grocery_' + i, box.checked);
+        box.closest('label').classList.toggle('done', box.checked);
+      });
+    });
+    function reset() {
+      boxes.forEach((box, i) => {
+        box.checked = false;
+        localStorage.removeItem('grocery_' + i);
+        box.closest('label').classList.remove('done');
+      });
+    }
+  </script>
+</body>
+</html>
