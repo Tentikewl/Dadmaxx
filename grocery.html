@@ -8,188 +8,160 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #f5f5f5;
-      padding: 20px;
-      max-width: 500px;
-      margin: 0 auto;
+      background: #f5f5f5; padding: 20px;
+      max-width: 500px; margin: 0 auto;
     }
-    h1 { font-size: 1.4rem; margin-bottom: 6px; color: #333; }
-    .sync-status { font-size: 0.75rem; color: #aaa; margin-bottom: 20px; }
-    .sync-status.live { color: #4CAF50; }
-    h2 {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #999;
-      margin: 24px 0 10px;
-    }
+    h1 { font-size: 1.4rem; margin-bottom: 4px; color: #333; }
+    .status { font-size: 0.75rem; margin-bottom: 20px; color: #aaa; }
+    .status.on { color: #4CAF50; }
+    h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #999; margin: 24px 0 10px; }
     label {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 12px 16px;
-      background: white;
-      border-radius: 10px;
-      margin-bottom: 8px;
-      font-size: 1rem;
-      color: #333;
-      cursor: pointer;
-      transition: opacity 0.2s;
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 16px; background: white; border-radius: 10px;
+      margin-bottom: 8px; font-size: 1rem; color: #333; cursor: pointer;
     }
     label.done { opacity: 0.4; text-decoration: line-through; }
-    input[type="checkbox"] {
-      width: 22px; height: 22px;
-      accent-color: #4CAF50;
-      flex-shrink: 0; cursor: pointer;
-    }
+    input[type=checkbox] { width: 22px; height: 22px; accent-color: #4CAF50; flex-shrink: 0; }
     .note { font-size: 0.8rem; color: #aaa; }
-    .del { margin-left: auto; background: none; border: none; color: #ddd; font-size: 1.2rem; cursor: pointer; padding: 0 4px; }
+    .del { margin-left: auto; background: none; border: none; color: #ddd; font-size: 1.2rem; cursor: pointer; }
     .del:hover { color: #ff5555; }
     .add-row { display: flex; gap: 8px; margin-top: 28px; }
     .add-row input {
-      flex: 1; padding: 12px 16px;
-      border-radius: 10px; border: 2px solid #e0e0e0;
-      font-size: 1rem; outline: none;
+      flex: 1; padding: 12px 16px; border-radius: 10px;
+      border: 2px solid #e0e0e0; font-size: 1rem; outline: none;
     }
     .add-row input:focus { border-color: #4CAF50; }
     .add-row button {
-      padding: 12px 18px; background: #4CAF50;
-      color: white; border: none; border-radius: 10px;
-      font-size: 1rem; cursor: pointer;
+      padding: 12px 18px; background: #4CAF50; color: white;
+      border: none; border-radius: 10px; font-size: 1rem; cursor: pointer;
     }
-    .reset-btn {
-      margin-top: 20px; width: 100%; padding: 14px;
-      background: #ff5555; color: white; border: none;
-      border-radius: 10px; font-size: 1rem; cursor: pointer;
-    }
+    .reset { margin-top: 16px; width: 100%; padding: 14px; background: #ff5555;
+      color: white; border: none; border-radius: 10px; font-size: 1rem; cursor: pointer; }
   </style>
 </head>
 <body>
   <h1>🛒 Weekly Groceries</h1>
-  <div class="sync-status" id="status">Connecting...</div>
+  <div class="status" id="status">Connecting…</div>
 
-  <h2>Meat & Fish</h2>
-  <label><input type="checkbox" data-id="0"> Beef mince</label>
-  <label><input type="checkbox" data-id="1"> Chicken thighs</label>
-  <label><input type="checkbox" data-id="2"> Basa fillets</label>
-  <label><input type="checkbox" data-id="3"> Prawns</label>
-  <label><input type="checkbox" data-id="4"> Pork belly</label>
-  <label><input type="checkbox" data-id="5"> Lamb chops</label>
-  <label><input type="checkbox" data-id="6"> Eggs</label>
+  <h2>Meat &amp; Fish</h2>
+  <label><input type=checkbox data-id=0> Beef mince</label>
+  <label><input type=checkbox data-id=1> Chicken thighs</label>
+  <label><input type=checkbox data-id=2> Basa fillets</label>
+  <label><input type=checkbox data-id=3> Prawns</label>
+  <label><input type=checkbox data-id=4> Pork belly</label>
+  <label><input type=checkbox data-id=5> Lamb chops</label>
+  <label><input type=checkbox data-id=6> Eggs</label>
 
   <h2>Produce</h2>
-  <label><input type="checkbox" data-id="7"> Lettuce <span class="note">taco cups + salad</span></label>
-  <label><input type="checkbox" data-id="8"> Avocado x2</label>
-  <label><input type="checkbox" data-id="9"> Cabbage / coleslaw mix</label>
-  <label><input type="checkbox" data-id="10"> Sweet potato</label>
-  <label><input type="checkbox" data-id="11"> Frozen peas</label>
-  <label><input type="checkbox" data-id="12"> Corn x3</label>
-  <label><input type="checkbox" data-id="13"> Capsicum, zucchini, spinach <span class="note">frittata</span></label>
-  <label><input type="checkbox" data-id="14"> Salad leaves</label>
-  <label><input type="checkbox" data-id="15"> Garlic, ginger</label>
-  <label><input type="checkbox" data-id="16"> Lemon</label>
-  <label><input type="checkbox" data-id="17"> Bananas, pear</label>
+  <label><input type=checkbox data-id=7> Lettuce <span class=note>taco cups + salad</span></label>
+  <label><input type=checkbox data-id=8> Avocado x2</label>
+  <label><input type=checkbox data-id=9> Cabbage / coleslaw mix</label>
+  <label><input type=checkbox data-id=10> Sweet potato</label>
+  <label><input type=checkbox data-id=11> Frozen peas</label>
+  <label><input type=checkbox data-id=12> Corn x3</label>
+  <label><input type=checkbox data-id=13> Capsicum, zucchini, spinach <span class=note>frittata</span></label>
+  <label><input type=checkbox data-id=14> Salad leaves</label>
+  <label><input type=checkbox data-id=15> Garlic, ginger</label>
+  <label><input type=checkbox data-id=16> Lemon</label>
+  <label><input type=checkbox data-id=17> Bananas, pear</label>
 
   <h2>Pantry</h2>
-  <label><input type="checkbox" data-id="18"> Soy sauce, honey, sesame oil, olive oil</label>
-  <label><input type="checkbox" data-id="19"> Tortillas <span class="note">small pack for Harry</span></label>
+  <label><input type=checkbox data-id=18> Soy sauce, honey, sesame oil, olive oil</label>
+  <label><input type=checkbox data-id=19> Tortillas <span class=note>small pack for Harry</span></label>
 
   <h2>Dairy</h2>
-  <label><input type="checkbox" data-id="20"> Cheese</label>
-  <label><input type="checkbox" data-id="21"> Butter</label>
-  <label><input type="checkbox" data-id="22"> Yoghurt <span class="note">Harry</span></label>
+  <label><input type=checkbox data-id=20> Cheese</label>
+  <label><input type=checkbox data-id=21> Butter</label>
+  <label><input type=checkbox data-id=22> Yoghurt <span class=note>Harry</span></label>
 
   <h2>Don't Forget</h2>
-  <label><input type="checkbox" data-id="23"> Bread <span class="note">Harry</span></label>
-  <label><input type="checkbox" data-id="24"> Dishwasher tablets</label>
+  <label><input type=checkbox data-id=23> Bread <span class=note>Harry</span></label>
+  <label><input type=checkbox data-id=24> Dishwasher tablets</label>
 
-  <h2 id="extras-header" style="display:none">Added Items</h2>
-  <div id="extras"></div>
+  <h2 id=extras-hdr style=display:none>Added Items</h2>
+  <div id=extras></div>
 
-  <div class="add-row">
-    <input type="text" id="new-item" placeholder="Add an item...">
-    <button onclick="addItem()">Add</button>
+  <div class=add-row>
+    <input type=text id=new-item placeholder="Add an item…">
+    <button onclick=addItem()>Add</button>
   </div>
-
-  <button class="reset-btn" onclick="resetAll()">Reset list</button>
+  <button class=reset onclick=resetAll()>Reset list</button>
 
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
   <script>
     const WEEK = 'dadmaxx-grocery-2026-w3';
-    const gun = Gun(['https://gun.eco/gun', 'https://gundb-relay-mlmr.onrender.com/gun']);
+    const gun = Gun([
+      'https://gun.eco/gun',
+      'wss://gun.bit.surf'
+    ]);
     const db = gun.get(WEEK);
+    const statusEl = document.getElementById('status');
 
-    const status = document.getElementById('status');
-    let connected = false;
-    gun.on('hi', () => { connected = true; status.textContent = 'Live • Changes sync with Jesse'; status.className = 'sync-status live'; });
-    gun.on('bye', () => { connected = false; status.textContent = 'Offline • Changes saved locally'; status.className = 'sync-status'; });
-    setTimeout(() => { if (!connected) { status.textContent = 'Syncing...'; } }, 3000);
+    // Connection indicator
+    gun.on('hi', peer => { statusEl.textContent = '● Live — syncing with Jesse'; statusEl.className = 'status on'; });
+    gun.on('bye', peer => { statusEl.textContent = 'Offline — changes saved locally'; statusEl.className = 'status'; });
 
-    // Base items
+    // Base item checkboxes
     document.querySelectorAll('input[type=checkbox]').forEach(box => {
-      const id = box.dataset.id;
-      const label = box.closest('label');
-
-      db.get('item-' + id).on(val => {
-        const checked = val === true;
-        box.checked = checked;
-        label.classList.toggle('done', checked);
+      const key = 'chk' + box.dataset.id;
+      const lbl = box.closest('label');
+      db.get(key).on(val => {
+        box.checked = val === true;
+        lbl.classList.toggle('done', val === true);
       });
-
       box.addEventListener('change', () => {
-        db.get('item-' + id).put(box.checked);
-        label.classList.toggle('done', box.checked);
+        db.get(key).put(box.checked);
+        lbl.classList.toggle('done', box.checked);
       });
     });
 
-    // Extra items
-    const extrasEl = document.getElementById('extras');
-    const extrasHeader = document.getElementById('extras-header');
-    const rendered = {};
+    // Extras — stored as JSON string for simplicity
+    let extras = [];
 
-    db.get('extras').map().on((item, key) => {
-      if (!item || !item.name) {
-        if (rendered[key]) { rendered[key].remove(); delete rendered[key]; }
-        updateExtrasHeader();
-        return;
-      }
-      if (!rendered[key]) {
-        const label = document.createElement('label');
-        const cb = document.createElement('input');
-        cb.type = 'checkbox';
-        cb.checked = !!item.checked;
-        cb.addEventListener('change', () => {
-          db.get('extras').get(key).put({ name: item.name, checked: cb.checked });
-          label.classList.toggle('done', cb.checked);
-        });
-        label.appendChild(cb);
-        label.appendChild(document.createTextNode(' ' + item.name));
-        label.classList.toggle('done', !!item.checked);
-        const del = document.createElement('button');
-        del.className = 'del';
-        del.textContent = '×';
-        del.onclick = e => { e.preventDefault(); db.get('extras').get(key).put(null); };
-        label.appendChild(del);
-        extrasEl.appendChild(label);
-        rendered[key] = label;
-        updateExtrasHeader();
-      } else {
-        rendered[key].querySelector('input').checked = !!item.checked;
-        rendered[key].classList.toggle('done', !!item.checked);
-      }
+    db.get('extras').on(raw => {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) { extras = parsed; renderExtras(); }
+      } catch(e) {}
     });
 
-    function updateExtrasHeader() {
-      extrasHeader.style.display = Object.keys(rendered).length ? 'block' : 'none';
+    function saveExtras() {
+      db.get('extras').put(JSON.stringify(extras));
+    }
+
+    function renderExtras() {
+      const container = document.getElementById('extras');
+      const hdr = document.getElementById('extras-hdr');
+      container.innerHTML = '';
+      hdr.style.display = extras.length ? 'block' : 'none';
+      extras.forEach((item, i) => {
+        const lbl = document.createElement('label');
+        const cb = document.createElement('input');
+        cb.type = 'checkbox'; cb.checked = item.checked;
+        cb.addEventListener('change', () => {
+          extras[i].checked = cb.checked;
+          lbl.classList.toggle('done', cb.checked);
+          saveExtras();
+        });
+        lbl.appendChild(cb);
+        lbl.appendChild(document.createTextNode(' ' + item.name));
+        lbl.classList.toggle('done', item.checked);
+        const del = document.createElement('button');
+        del.className = 'del'; del.textContent = '×';
+        del.onclick = e => { e.preventDefault(); extras.splice(i, 1); renderExtras(); saveExtras(); };
+        lbl.appendChild(del);
+        container.appendChild(lbl);
+      });
     }
 
     function addItem() {
       const input = document.getElementById('new-item');
       const name = input.value.trim();
       if (!name) return;
-      db.get('extras').set({ name, checked: false });
-      input.value = '';
-      input.focus();
+      extras.push({ name, checked: false });
+      renderExtras();
+      saveExtras();
+      input.value = ''; input.focus();
     }
 
     document.getElementById('new-item').addEventListener('keydown', e => {
@@ -199,11 +171,9 @@
     function resetAll() {
       if (!confirm('Reset the whole list?')) return;
       document.querySelectorAll('input[type=checkbox]').forEach(box => {
-        db.get('item-' + box.dataset.id).put(false);
+        db.get('chk' + box.dataset.id).put(false);
       });
-      db.get('extras').map().once((item, key) => {
-        if (item) db.get('extras').get(key).put(null);
-      });
+      extras = []; renderExtras(); saveExtras();
     }
   </script>
 </body>
