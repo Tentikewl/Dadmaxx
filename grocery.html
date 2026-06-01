@@ -13,7 +13,9 @@
       max-width: 500px;
       margin: 0 auto;
     }
-    h1 { font-size: 1.4rem; margin-bottom: 20px; color: #333; }
+    h1 { font-size: 1.4rem; margin-bottom: 6px; color: #333; }
+    .sync-status { font-size: 0.75rem; color: #aaa; margin-bottom: 20px; }
+    .sync-status.live { color: #4CAF50; }
     h2 {
       font-size: 0.75rem;
       text-transform: uppercase;
@@ -40,82 +42,31 @@
       accent-color: #4CAF50;
       flex-shrink: 0; cursor: pointer;
     }
-    .note { font-size: 0.8rem; color: #aaa; margin-left: 4px; }
-    .delete-btn {
-      margin-left: auto;
-      background: none;
-      border: none;
-      color: #ccc;
-      font-size: 1.2rem;
-      cursor: pointer;
-      padding: 0 4px;
-      flex-shrink: 0;
+    .note { font-size: 0.8rem; color: #aaa; }
+    .del { margin-left: auto; background: none; border: none; color: #ddd; font-size: 1.2rem; cursor: pointer; padding: 0 4px; }
+    .del:hover { color: #ff5555; }
+    .add-row { display: flex; gap: 8px; margin-top: 28px; }
+    .add-row input {
+      flex: 1; padding: 12px 16px;
+      border-radius: 10px; border: 2px solid #e0e0e0;
+      font-size: 1rem; outline: none;
     }
-    .delete-btn:hover { color: #ff5555; }
-    .add-section {
-      margin-top: 28px;
-      display: flex;
-      gap: 8px;
+    .add-row input:focus { border-color: #4CAF50; }
+    .add-row button {
+      padding: 12px 18px; background: #4CAF50;
+      color: white; border: none; border-radius: 10px;
+      font-size: 1rem; cursor: pointer;
     }
-    .add-section input[type="text"] {
-      flex: 1;
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 2px solid #e0e0e0;
-      font-size: 1rem;
-      outline: none;
+    .reset-btn {
+      margin-top: 20px; width: 100%; padding: 14px;
+      background: #ff5555; color: white; border: none;
+      border-radius: 10px; font-size: 1rem; cursor: pointer;
     }
-    .add-section input[type="text"]:focus { border-color: #4CAF50; }
-    .add-section button {
-      padding: 12px 18px;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    .extra-header {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #999;
-      margin: 24px 0 10px;
-    }
-    .btn-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 24px;
-    }
-    .btn-row button {
-      flex: 1;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-    .btn-share { background: #007AFF; color: white; }
-    .btn-reset { background: #ff5555; color: white; }
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #333;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-    .toast.show { opacity: 1; }
   </style>
 </head>
 <body>
   <h1>🛒 Weekly Groceries</h1>
+  <div class="sync-status" id="status">Connecting...</div>
 
   <h2>Meat & Fish</h2>
   <label><input type="checkbox" data-id="0"> Beef mince</label>
@@ -152,94 +103,91 @@
   <label><input type="checkbox" data-id="23"> Bread <span class="note">Harry</span></label>
   <label><input type="checkbox" data-id="24"> Dishwasher tablets</label>
 
-  <div class="extra-header" id="extra-header" style="display:none">Added Items</div>
-  <div id="extra-items"></div>
+  <h2 id="extras-header" style="display:none">Added Items</h2>
+  <div id="extras"></div>
 
-  <div class="add-section">
+  <div class="add-row">
     <input type="text" id="new-item" placeholder="Add an item...">
     <button onclick="addItem()">Add</button>
   </div>
 
-  <div class="btn-row">
-    <button class="btn-share" onclick="shareList()">Share list</button>
-    <button class="btn-reset" onclick="resetList()">Reset</button>
-  </div>
+  <button class="reset-btn" onclick="resetAll()">Reset list</button>
 
-  <div class="toast" id="toast">Link copied!</div>
-
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
   <script>
-    const boxes = document.querySelectorAll('input[type="checkbox"]');
-    let extras = [];
+    const WEEK = 'dadmaxx-grocery-2026-w3';
+    const gun = Gun(['https://gun.eco/gun', 'https://gundb-relay-mlmr.onrender.com/gun']);
+    const db = gun.get(WEEK);
 
-    function loadState() {
-      let checked = {}, savedExtras = [];
-      try {
-        const hash = decodeURIComponent(window.location.hash.slice(1));
-        if (hash) {
-          const parsed = JSON.parse(hash);
-          checked = parsed.checked || {};
-          savedExtras = parsed.extras || [];
-        }
-      } catch(e) {
-        boxes.forEach(b => {
-          b.checked = localStorage.getItem('g_' + b.dataset.id) === '1';
-        });
-        try { savedExtras = JSON.parse(localStorage.getItem('g_extras') || '[]'); } catch(e){}
-        return;
-      }
-      boxes.forEach(b => { b.checked = !!checked[b.dataset.id]; });
-      extras = savedExtras;
-      renderExtras();
-    }
+    const status = document.getElementById('status');
+    let connected = false;
+    gun.on('hi', () => { connected = true; status.textContent = 'Live • Changes sync with Jesse'; status.className = 'sync-status live'; });
+    gun.on('bye', () => { connected = false; status.textContent = 'Offline • Changes saved locally'; status.className = 'sync-status'; });
+    setTimeout(() => { if (!connected) { status.textContent = 'Syncing...'; } }, 3000);
 
-    function saveLocal() {
-      const checked = {};
-      boxes.forEach(b => { if (b.checked) checked[b.dataset.id] = 1; });
-      localStorage.setItem('g_state', JSON.stringify({ checked, extras }));
-    }
+    // Base items
+    document.querySelectorAll('input[type=checkbox]').forEach(box => {
+      const id = box.dataset.id;
+      const label = box.closest('label');
 
-    boxes.forEach(b => {
-      b.closest('label').classList.toggle('done', b.checked);
-      b.addEventListener('change', () => {
-        b.closest('label').classList.toggle('done', b.checked);
-        saveLocal();
+      db.get('item-' + id).on(val => {
+        const checked = val === true;
+        box.checked = checked;
+        label.classList.toggle('done', checked);
+      });
+
+      box.addEventListener('change', () => {
+        db.get('item-' + id).put(box.checked);
+        label.classList.toggle('done', box.checked);
       });
     });
 
-    function renderExtras() {
-      const container = document.getElementById('extra-items');
-      const header = document.getElementById('extra-header');
-      container.innerHTML = '';
-      header.style.display = extras.length ? 'block' : 'none';
-      extras.forEach((item, i) => {
+    // Extra items
+    const extrasEl = document.getElementById('extras');
+    const extrasHeader = document.getElementById('extras-header');
+    const rendered = {};
+
+    db.get('extras').map().on((item, key) => {
+      if (!item || !item.name) {
+        if (rendered[key]) { rendered[key].remove(); delete rendered[key]; }
+        updateExtrasHeader();
+        return;
+      }
+      if (!rendered[key]) {
         const label = document.createElement('label');
         const cb = document.createElement('input');
         cb.type = 'checkbox';
-        cb.checked = item.checked || false;
+        cb.checked = !!item.checked;
         cb.addEventListener('change', () => {
-          extras[i].checked = cb.checked;
+          db.get('extras').get(key).put({ name: item.name, checked: cb.checked });
           label.classList.toggle('done', cb.checked);
-          saveLocal();
         });
         label.appendChild(cb);
         label.appendChild(document.createTextNode(' ' + item.name));
-        label.classList.toggle('done', item.checked);
+        label.classList.toggle('done', !!item.checked);
         const del = document.createElement('button');
-        del.className = 'delete-btn';
+        del.className = 'del';
         del.textContent = '×';
-        del.onclick = (e) => { e.preventDefault(); extras.splice(i, 1); renderExtras(); saveLocal(); };
+        del.onclick = e => { e.preventDefault(); db.get('extras').get(key).put(null); };
         label.appendChild(del);
-        container.appendChild(label);
-      });
+        extrasEl.appendChild(label);
+        rendered[key] = label;
+        updateExtrasHeader();
+      } else {
+        rendered[key].querySelector('input').checked = !!item.checked;
+        rendered[key].classList.toggle('done', !!item.checked);
+      }
+    });
+
+    function updateExtrasHeader() {
+      extrasHeader.style.display = Object.keys(rendered).length ? 'block' : 'none';
     }
 
     function addItem() {
       const input = document.getElementById('new-item');
       const name = input.value.trim();
       if (!name) return;
-      extras.push({ name, checked: false });
-      renderExtras();
-      saveLocal();
+      db.get('extras').set({ name, checked: false });
       input.value = '';
       input.focus();
     }
@@ -248,30 +196,15 @@
       if (e.key === 'Enter') addItem();
     });
 
-    function shareList() {
-      const checked = {};
-      boxes.forEach(b => { if (b.checked) checked[b.dataset.id] = 1; });
-      const state = JSON.stringify({ checked, extras });
-      const url = window.location.origin + window.location.pathname + '#' + encodeURIComponent(state);
-      navigator.clipboard.writeText(url).then(() => showToast('Link copied!'));
+    function resetAll() {
+      if (!confirm('Reset the whole list?')) return;
+      document.querySelectorAll('input[type=checkbox]').forEach(box => {
+        db.get('item-' + box.dataset.id).put(false);
+      });
+      db.get('extras').map().once((item, key) => {
+        if (item) db.get('extras').get(key).put(null);
+      });
     }
-
-    function resetList() {
-      boxes.forEach(b => { b.checked = false; b.closest('label').classList.remove('done'); });
-      extras = [];
-      renderExtras();
-      localStorage.clear();
-      window.location.hash = '';
-    }
-
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2000);
-    }
-
-    loadState();
   </script>
 </body>
 </html>
