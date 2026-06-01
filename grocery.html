@@ -13,11 +13,7 @@
       max-width: 500px;
       margin: 0 auto;
     }
-    h1 {
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-      color: #333;
-    }
+    h1 { font-size: 1.4rem; margin-bottom: 20px; color: #333; }
     h2 {
       font-size: 0.75rem;
       text-transform: uppercase;
@@ -38,99 +34,244 @@
       cursor: pointer;
       transition: opacity 0.2s;
     }
-    label.done {
-      opacity: 0.4;
-      text-decoration: line-through;
-    }
+    label.done { opacity: 0.4; text-decoration: line-through; }
     input[type="checkbox"] {
-      width: 22px;
-      height: 22px;
+      width: 22px; height: 22px;
       accent-color: #4CAF50;
-      flex-shrink: 0;
+      flex-shrink: 0; cursor: pointer;
+    }
+    .note { font-size: 0.8rem; color: #aaa; margin-left: 4px; }
+    .delete-btn {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 1.2rem;
       cursor: pointer;
+      padding: 0 4px;
+      flex-shrink: 0;
     }
-    .note {
-      font-size: 0.8rem;
-      color: #aaa;
-      margin-left: 4px;
+    .delete-btn:hover { color: #ff5555; }
+    .add-section {
+      margin-top: 28px;
+      display: flex;
+      gap: 8px;
     }
-    button {
-      margin-top: 30px;
-      width: 100%;
-      padding: 14px;
-      background: #ff5555;
+    .add-section input[type="text"] {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 2px solid #e0e0e0;
+      font-size: 1rem;
+      outline: none;
+    }
+    .add-section input[type="text"]:focus { border-color: #4CAF50; }
+    .add-section button {
+      padding: 12px 18px;
+      background: #4CAF50;
       color: white;
       border: none;
       border-radius: 10px;
       font-size: 1rem;
       cursor: pointer;
     }
+    .extra-header {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #999;
+      margin: 24px 0 10px;
+    }
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .btn-row button {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    .btn-share { background: #007AFF; color: white; }
+    .btn-reset { background: #ff5555; color: white; }
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .toast.show { opacity: 1; }
   </style>
 </head>
 <body>
   <h1>🛒 Weekly Groceries</h1>
 
   <h2>Meat & Fish</h2>
-  <label><input type="checkbox"> Chicken thighs</label>
-  <label><input type="checkbox"> Lamb shoulder <span class="note">bone-in</span></label>
-  <label><input type="checkbox"> Pork chops</label>
-  <label><input type="checkbox"> Bacon</label>
-  <label><input type="checkbox"> White fish fillets</label>
-  <label><input type="checkbox"> Eggs</label>
+  <label><input type="checkbox" data-id="0"> Beef mince</label>
+  <label><input type="checkbox" data-id="1"> Chicken thighs</label>
+  <label><input type="checkbox" data-id="2"> Basa fillets</label>
+  <label><input type="checkbox" data-id="3"> Prawns</label>
+  <label><input type="checkbox" data-id="4"> Pork belly</label>
+  <label><input type="checkbox" data-id="5"> Lamb chops</label>
+  <label><input type="checkbox" data-id="6"> Eggs</label>
 
   <h2>Produce</h2>
-  <label><input type="checkbox"> Potatoes <span class="note">mash + oven chips</span></label>
-  <label><input type="checkbox"> Carrots</label>
-  <label><input type="checkbox"> Sweet potato</label>
-  <label><input type="checkbox"> Green beans</label>
-  <label><input type="checkbox"> Mushrooms</label>
-  <label><input type="checkbox"> Capsicum or zucchini <span class="note">pizza topping</span></label>
-  <label><input type="checkbox"> Tinned tomatoes x2</label>
-  <label><input type="checkbox"> Fresh tomatoes <span class="note">shakshuka</span></label>
-  <label><input type="checkbox"> Onion</label>
-  <label><input type="checkbox"> Garlic</label>
-  <label><input type="checkbox"> Salad leaves</label>
-  <label><input type="checkbox"> Lemon</label>
-  <label><input type="checkbox"> Bananas</label>
-  <label><input type="checkbox"> Pear</label>
-  <label><input type="checkbox"> Avocado</label>
+  <label><input type="checkbox" data-id="7"> Lettuce <span class="note">taco cups + salad</span></label>
+  <label><input type="checkbox" data-id="8"> Avocado x2</label>
+  <label><input type="checkbox" data-id="9"> Cabbage / coleslaw mix</label>
+  <label><input type="checkbox" data-id="10"> Sweet potato</label>
+  <label><input type="checkbox" data-id="11"> Frozen peas</label>
+  <label><input type="checkbox" data-id="12"> Corn x3</label>
+  <label><input type="checkbox" data-id="13"> Capsicum, zucchini, spinach <span class="note">frittata</span></label>
+  <label><input type="checkbox" data-id="14"> Salad leaves</label>
+  <label><input type="checkbox" data-id="15"> Garlic, ginger</label>
+  <label><input type="checkbox" data-id="16"> Lemon</label>
+  <label><input type="checkbox" data-id="17"> Bananas, pear</label>
 
   <h2>Pantry</h2>
-  <label><input type="checkbox"> Pasta</label>
-  <label><input type="checkbox"> Pizza dough or flour + yeast</label>
-  <label><input type="checkbox"> Olive oil</label>
-  <label><input type="checkbox"> Chicken stock</label>
+  <label><input type="checkbox" data-id="18"> Soy sauce, honey, sesame oil, olive oil</label>
+  <label><input type="checkbox" data-id="19"> Tortillas <span class="note">small pack for Harry</span></label>
 
   <h2>Dairy</h2>
-  <label><input type="checkbox"> Mozzarella <span class="note">pizza</span></label>
-  <label><input type="checkbox"> Parmesan</label>
-  <label><input type="checkbox"> Thickened cream</label>
-  <label><input type="checkbox"> Butter</label>
-  <label><input type="checkbox"> Yoghurt <span class="note">Harry</span></label>
+  <label><input type="checkbox" data-id="20"> Cheese</label>
+  <label><input type="checkbox" data-id="21"> Butter</label>
+  <label><input type="checkbox" data-id="22"> Yoghurt <span class="note">Harry</span></label>
 
   <h2>Don't Forget</h2>
-  <label><input type="checkbox"> Bread <span class="note">Harry</span></label>
-  <label><input type="checkbox"> Dishwasher tablets</label>
+  <label><input type="checkbox" data-id="23"> Bread <span class="note">Harry</span></label>
+  <label><input type="checkbox" data-id="24"> Dishwasher tablets</label>
 
-  <button onclick="reset()">Reset List</button>
+  <div class="extra-header" id="extra-header" style="display:none">Added Items</div>
+  <div id="extra-items"></div>
+
+  <div class="add-section">
+    <input type="text" id="new-item" placeholder="Add an item...">
+    <button onclick="addItem()">Add</button>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-share" onclick="shareList()">Share list</button>
+    <button class="btn-reset" onclick="resetList()">Reset</button>
+  </div>
+
+  <div class="toast" id="toast">Link copied!</div>
 
   <script>
     const boxes = document.querySelectorAll('input[type="checkbox"]');
-    boxes.forEach((box, i) => {
-      box.checked = localStorage.getItem('grocery_' + i) === 'true';
-      box.closest('label').classList.toggle('done', box.checked);
-      box.addEventListener('change', () => {
-        localStorage.setItem('grocery_' + i, box.checked);
-        box.closest('label').classList.toggle('done', box.checked);
+    let extras = [];
+
+    function loadState() {
+      let checked = {}, savedExtras = [];
+      try {
+        const hash = decodeURIComponent(window.location.hash.slice(1));
+        if (hash) {
+          const parsed = JSON.parse(hash);
+          checked = parsed.checked || {};
+          savedExtras = parsed.extras || [];
+        }
+      } catch(e) {
+        boxes.forEach(b => {
+          b.checked = localStorage.getItem('g_' + b.dataset.id) === '1';
+        });
+        try { savedExtras = JSON.parse(localStorage.getItem('g_extras') || '[]'); } catch(e){}
+        return;
+      }
+      boxes.forEach(b => { b.checked = !!checked[b.dataset.id]; });
+      extras = savedExtras;
+      renderExtras();
+    }
+
+    function saveLocal() {
+      const checked = {};
+      boxes.forEach(b => { if (b.checked) checked[b.dataset.id] = 1; });
+      localStorage.setItem('g_state', JSON.stringify({ checked, extras }));
+    }
+
+    boxes.forEach(b => {
+      b.closest('label').classList.toggle('done', b.checked);
+      b.addEventListener('change', () => {
+        b.closest('label').classList.toggle('done', b.checked);
+        saveLocal();
       });
     });
-    function reset() {
-      boxes.forEach((box, i) => {
-        box.checked = false;
-        localStorage.removeItem('grocery_' + i);
-        box.closest('label').classList.remove('done');
+
+    function renderExtras() {
+      const container = document.getElementById('extra-items');
+      const header = document.getElementById('extra-header');
+      container.innerHTML = '';
+      header.style.display = extras.length ? 'block' : 'none';
+      extras.forEach((item, i) => {
+        const label = document.createElement('label');
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = item.checked || false;
+        cb.addEventListener('change', () => {
+          extras[i].checked = cb.checked;
+          label.classList.toggle('done', cb.checked);
+          saveLocal();
+        });
+        label.appendChild(cb);
+        label.appendChild(document.createTextNode(' ' + item.name));
+        label.classList.toggle('done', item.checked);
+        const del = document.createElement('button');
+        del.className = 'delete-btn';
+        del.textContent = '×';
+        del.onclick = (e) => { e.preventDefault(); extras.splice(i, 1); renderExtras(); saveLocal(); };
+        label.appendChild(del);
+        container.appendChild(label);
       });
     }
+
+    function addItem() {
+      const input = document.getElementById('new-item');
+      const name = input.value.trim();
+      if (!name) return;
+      extras.push({ name, checked: false });
+      renderExtras();
+      saveLocal();
+      input.value = '';
+      input.focus();
+    }
+
+    document.getElementById('new-item').addEventListener('keydown', e => {
+      if (e.key === 'Enter') addItem();
+    });
+
+    function shareList() {
+      const checked = {};
+      boxes.forEach(b => { if (b.checked) checked[b.dataset.id] = 1; });
+      const state = JSON.stringify({ checked, extras });
+      const url = window.location.origin + window.location.pathname + '#' + encodeURIComponent(state);
+      navigator.clipboard.writeText(url).then(() => showToast('Link copied!'));
+    }
+
+    function resetList() {
+      boxes.forEach(b => { b.checked = false; b.closest('label').classList.remove('done'); });
+      extras = [];
+      renderExtras();
+      localStorage.clear();
+      window.location.hash = '';
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    loadState();
   </script>
 </body>
 </html>
