@@ -44,39 +44,46 @@
   <div class="status" id="status">Connecting…</div>
 
   <h2>Meat &amp; Fish</h2>
-  <label><input type=checkbox data-id=0> Beef mince</label>
-  <label><input type=checkbox data-id=1> Chicken thighs</label>
-  <label><input type=checkbox data-id=2> Basa fillets</label>
-  <label><input type=checkbox data-id=3> Prawns</label>
-  <label><input type=checkbox data-id=4> Pork belly</label>
-  <label><input type=checkbox data-id=5> Lamb chops</label>
+  <label><input type=checkbox data-id=0> Chicken thighs</label>
+  <label><input type=checkbox data-id=1> Lamb shoulder <span class=note>bone-in</span></label>
+  <label><input type=checkbox data-id=2> Prawns</label>
+  <label><input type=checkbox data-id=3> Beef mince</label>
+  <label><input type=checkbox data-id=4> Basa fillets</label>
+  <label><input type=checkbox data-id=5> Pork chops</label>
   <label><input type=checkbox data-id=6> Eggs</label>
 
   <h2>Produce</h2>
-  <label><input type=checkbox data-id=7> Lettuce <span class=note>taco cups + salad</span></label>
-  <label><input type=checkbox data-id=8> Avocado x2</label>
-  <label><input type=checkbox data-id=9> Cabbage / coleslaw mix</label>
+  <label><input type=checkbox data-id=7> Bok choy</label>
+  <label><input type=checkbox data-id=8> Mushrooms x2 <span class=note>stir fry + pork sauce</span></label>
+  <label><input type=checkbox data-id=9> Corn x2</label>
   <label><input type=checkbox data-id=10> Sweet potato</label>
-  <label><input type=checkbox data-id=11> Frozen peas</label>
-  <label><input type=checkbox data-id=12> Corn x3</label>
-  <label><input type=checkbox data-id=13> Capsicum, zucchini, spinach <span class=note>frittata</span></label>
-  <label><input type=checkbox data-id=14> Salad leaves</label>
-  <label><input type=checkbox data-id=15> Garlic, ginger</label>
-  <label><input type=checkbox data-id=16> Lemon</label>
-  <label><input type=checkbox data-id=17> Bananas, pear</label>
+  <label><input type=checkbox data-id=11> Broccolini</label>
+  <label><input type=checkbox data-id=12> Green beans</label>
+  <label><input type=checkbox data-id=13> Lettuce <span class=note>mince cups + salad</span></label>
+  <label><input type=checkbox data-id=14> Avocado x2</label>
+  <label><input type=checkbox data-id=15> Tomatoes <span class=note>shakshuka</span></label>
+  <label><input type=checkbox data-id=16> Capsicum <span class=note>shakshuka</span></label>
+  <label><input type=checkbox data-id=17> Garlic, ginger</label>
+  <label><input type=checkbox data-id=18> Lemon</label>
+  <label><input type=checkbox data-id=19> Bananas, pear <span class=note>Harry snacks</span></label>
+  <label><input type=checkbox data-id=20> Roasting veg <span class=note>carrots, potatoes</span></label>
 
   <h2>Pantry</h2>
-  <label><input type=checkbox data-id=18> Soy sauce, honey, sesame oil, olive oil</label>
-  <label><input type=checkbox data-id=19> Tortillas <span class=note>small pack for Harry</span></label>
+  <label><input type=checkbox data-id=21> Soy sauce, oyster sauce, sesame oil</label>
+  <label><input type=checkbox data-id=22> Rice</label>
+  <label><input type=checkbox data-id=23> Crusty bread <span class=note>shakshuka</span></label>
+  <label><input type=checkbox data-id=24> Tinned tomatoes x2</label>
 
   <h2>Dairy</h2>
-  <label><input type=checkbox data-id=20> Cheese</label>
-  <label><input type=checkbox data-id=21> Butter</label>
-  <label><input type=checkbox data-id=22> Yoghurt <span class=note>Harry</span></label>
+  <label><input type=checkbox data-id=25> Butter</label>
+  <label><input type=checkbox data-id=26> Cream <span class=note>mushroom sauce</span></label>
+  <label><input type=checkbox data-id=27> Yoghurt <span class=note>Harry</span></label>
 
   <h2>Don't Forget</h2>
-  <label><input type=checkbox data-id=23> Bread <span class=note>Harry</span></label>
-  <label><input type=checkbox data-id=24> Dishwasher tablets</label>
+  <label><input type=checkbox data-id=28> Bread <span class=note>Harry</span></label>
+  <label><input type=checkbox data-id=29> Toilet paper</label>
+  <label><input type=checkbox data-id=30> Paper towel</label>
+  <label><input type=checkbox data-id=31> Dishwasher tablets</label>
 
   <h2 id=extras-hdr style=display:none>Added Items</h2>
   <div id=extras></div>
@@ -89,19 +96,14 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
   <script>
-    const WEEK = 'dadmaxx-grocery-2026-w3';
-    const gun = Gun([
-      'https://gun.eco/gun',
-      'wss://gun.bit.surf'
-    ]);
+    const WEEK = 'dadmaxx-grocery-2026-w4';
+    const gun = Gun(['https://gun.eco/gun', 'wss://gun.bit.surf']);
     const db = gun.get(WEEK);
     const statusEl = document.getElementById('status');
 
-    // Connection indicator
-    gun.on('hi', peer => { statusEl.textContent = '● Live — syncing with Jesse'; statusEl.className = 'status on'; });
-    gun.on('bye', peer => { statusEl.textContent = 'Offline — changes saved locally'; statusEl.className = 'status'; });
+    gun.on('hi', () => { statusEl.textContent = '● Live — syncing with Jesse'; statusEl.className = 'status on'; });
+    gun.on('bye', () => { statusEl.textContent = 'Offline — changes saved locally'; statusEl.className = 'status'; });
 
-    // Base item checkboxes
     document.querySelectorAll('input[type=checkbox]').forEach(box => {
       const key = 'chk' + box.dataset.id;
       const lbl = box.closest('label');
@@ -115,9 +117,7 @@
       });
     });
 
-    // Extras — stored as JSON string for simplicity
     let extras = [];
-
     db.get('extras').on(raw => {
       try {
         const parsed = JSON.parse(raw);
@@ -125,9 +125,7 @@
       } catch(e) {}
     });
 
-    function saveExtras() {
-      db.get('extras').put(JSON.stringify(extras));
-    }
+    function saveExtras() { db.get('extras').put(JSON.stringify(extras)); }
 
     function renderExtras() {
       const container = document.getElementById('extras');
@@ -159,8 +157,7 @@
       const name = input.value.trim();
       if (!name) return;
       extras.push({ name, checked: false });
-      renderExtras();
-      saveExtras();
+      renderExtras(); saveExtras();
       input.value = ''; input.focus();
     }
 
